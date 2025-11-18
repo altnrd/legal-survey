@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legal AI Assistant Needs Assessment Survey</title>
+    <style>
+        :root {
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-charcoal-700: rgba(31, 33, 33, 1);
+            --color-charcoal-800: rgba(38, 40, 40, 1);
+            --color-gray-200: rgba(245, 245, 245, 1);
+            --color-gray-300: rgba(167, 169, 169, 1);
+            --color-teal-300: rgba(50, 184, 198, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--color-cream-50);
+            color: var(--color-slate-900);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: var(--color-charcoal-700);
+                color: var(--color-gray-200);
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--color-cream-100);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .container {
+                background: var(--color-charcoal-800);
+            }
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--color-slate-900);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            h1 {
+                color: var(--color-gray-200);
+            }
+        }
+
+        .subtitle {
+            color: var(--color-slate-500);
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .subtitle {
+                color: var(--color-gray-300);
+            }
+        }
+
+        .section {
+            margin-bottom: 48px;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--color-teal-500);
+            color: var(--color-teal-600);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .section-title {
+                color: var(--color-teal-300);
+                border-bottom-color: var(--color-teal-300);
+            }
+        }
+
+        .question {
+            margin-bottom: 32px;
+        }
+
+        .question-label {
+            font-weight: 500;
+            margin-bottom: 12px;
+            display: block;
+            font-size: 15px;
+        }
+
+        .question-type {
+            font-size: 12px;
+            color: var(--color-slate-500);
+            font-style: italic;
+            margin-left: 8px;
+            font-weight: normal;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .question-type {
+                color: var(--color-gray-300);
+            }
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid rgba(var(--color-brown-600-rgb), 0.2);
+            border-radius: 8px;
+            font-size: 14px;
+            background: var(--color-cream-100);
+            color: var(--color-slate-900);
+            transition: border-color 0.2s;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            input[type="text"],
+            input[type="email"],
+            input[type="tel"],
+            textarea,
+            select {
+                background: var(--color-charcoal-700);
+                color: var(--color-gray-200);
+                border-color: rgba(119, 124, 124, 0.3);
+            }
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: 2px solid var(--color-teal-500);
+            border-color: var(--color-teal-500);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .checkbox-group,
+        .radio-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .checkbox-item,
+        .radio-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            cursor: pointer;
+        }
+
+        .checkbox-item input,
+        .radio-item input {
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+
+        input[type="checkbox"],
+        input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--color-teal-500);
+        }
+
+        .scale-group {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .scale-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .scale-option input[type="radio"] {
+            margin: 0;
+        }
+
+        .scale-label {
+            font-size: 12px;
+            color: var(--color-slate-500);
+            text-align: center;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .scale-label {
+                color: var(--color-gray-300);
+            }
+        }
+
+        .submit-btn {
+            background: var(--color-teal-500);
+            color: white;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+            width: 100%;
+            margin-top: 32px;
+        }
+
+        .submit-btn:hover {
+            background: var(--color-teal-600);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .submit-btn {
+                background: var(--color-teal-300);
+                color: var(--color-slate-900);
+            }
+            .submit-btn:hover {
+                background: var(--color-teal-500);
+            }
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: rgba(var(--color-brown-600-rgb), 0.1);
+            border-radius: 4px;
+            margin-bottom: 32px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--color-teal-500);
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .progress-fill {
+                background: var(--color-teal-300);
+            }
+        }
+
+        .required {
+            color: #e74c3c;
+        }
+
+        .success-message {
+            display: none;
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .success-message {
+                background: #1e4620;
+                border-color: #2d5a2e;
+                color: #b7e4b8;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .container {
+                padding: 24px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+
+            .scale-group {
+                gap: 12px;
+            }
+
+            .scale-label {
+                font-size: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="successMessage" class="success-message">
+            <h2 style="margin-bottom: 10px;">✓ Survey Submitted Successfully!</h2>
+            <p>Thank you for your valuable feedback. Your responses have been recorded.</p>
+        </div>
+
+        <h1>Legal AI Assistant Needs Assessment</h1>
+        <p class="subtitle">Estimated time: 10-12 minutes | Available in: English, Hindi, Marathi, Tamil, Telugu, Kannada, Malayalam</p>
+        
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar"></div>
+        </div>
+
+        <form id="surveyForm">
+            <!-- SECTION A: BACKGROUND -->
+            <div class="section">
+                <h2 class="section-title">Section A: Background & Professional Profile</h2>
+                
+                <div class="question">
+                    <label class="question-label">
+                        A1. What best describes your current role? <span class="required">*</span>
+                        <span class="question-type">(Single select)</span>
+                    </label>
+                    <select name="role" required>
+                        <option value="">Select your role...</option>
+                        <option value="solo">Solo practitioner</option>
+                        <option value="small-firm">Small law firm (2-5 lawyers)</option>
+                        <option value="mid-firm">Mid-size firm (6-20 lawyers)</option>
+                        <option value="large-firm">Large firm (21+ lawyers)</option>
+                        <option value="inhouse">In-house counsel (corporate/NGO/government)</option>
+                        <option value="researcher">Legal researcher/paralegal</option>
+                        <option value="student">Law student or recent graduate</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        A2. How many years have you been practicing law? <span class="required">*</span>
+                        <span class="question-type">(Single select)</span>
+                    </label>
+                    <select name="experience" required>
+                        <option value="">Select experience...</option>
+                        <option value="0-2">0-2 years (entry-level)</option>
+                        <option value="3-5">3-5 years</option>
+                        <option value="6-10">6-10 years</option>
+                        <option value="11-15">11-15 years</option>
+                        <option value="16-25">16-25 years</option>
+                        <option value="25+">25+ years</option>
+                    </select>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        A3. What is your primary practice area? <span class="required">*</span>
+                        <span class="question-type">(Multiple select, max 3)</span>
+                    </label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="practice_area" value="civil"> Civil litigation</label>
+                        <label class="checkbox-item"><input type="checkbox" name="practice_area" value="criminal"> Criminal law</label>
+                        <label class="checkbox-item"><input type="checkbox" name="practice_area" value="corporate"> Corporate & commercial law</label>
+                        <label class="checkbox-item"><input type="checkbox" name="practice_area" value="ip"> Intellectual property</label>
+                        <label class="checkbox-item"><input type="checkbox" name="practice_area" value="labor"> Labor & employment law</label>
+                        <label class="checkbox-item"><input type="checkbox" name="practice_area" value="realestate"> Real estate & property law</label>
+                        <label class="checkbox-item"><input type="checkbox" name="practice_area" value="admin"> Administrative law</label>
+                        <label class="checkbox-item"><input type="checkbox" name="practice_area" value="constitutional"> Constitutional law</label>
+                        <label class="checkbox-item"><input type="checkbox" name="practice_area" value="tax"> Tax law</label>
+                        <label class="checkbox-item"><input type="checkbox" name="practice_area" value="family"> Family law</label>
+                        <label class="checkbox-item"><input type="checkbox" name="practice_area" value="environmental"> Environmental law</label>
+                        <label class="checkbox-item"><input type="checkbox" name="practice_area" value="banking"> Banking & finance</label>
+                        <label class="checkbox-item"><input type="checkbox" name="practice_area" value="adr"> Arbitration/Alternative dispute resolution</label>
+                        <label class="checkbox-item"><input type="checkbox" name="practice_area" value="probono"> Public interest/pro bono work</label>
+                    </div>
+                    <input type="text" name="practice_area_other" placeholder="Other (please specify)" style="margin-top: 12px;">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">A4. What is your primary city/region of practice?</label>
+                    <input type="text" name="location" placeholder="e.g., Mumbai, Maharashtra">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        A5. What languages do you work in regularly?
+                        <span class="question-type">(Multiple select)</span>
+                    </label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="languages" value="english"> English</label>
+                        <label class="checkbox-item"><input type="checkbox" name="languages" value="hindi"> Hindi</label>
+                        <label class="checkbox-item"><input type="checkbox" name="languages" value="marathi"> Marathi</label>
+                        <label class="checkbox-item"><input type="checkbox" name="languages" value="tamil"> Tamil</label>
+                        <label class="checkbox-item"><input type="checkbox" name="languages" value="telugu"> Telugu</label>
+                        <label class="checkbox-item"><input type="checkbox" name="languages" value="kannada"> Kannada</label>
+                        <label class="checkbox-item"><input type="checkbox" name="languages" value="gujarati"> Gujarati</label>
+                        <label class="checkbox-item"><input type="checkbox" name="languages" value="bengali"> Bengali</label>
+                    </div>
+                    <input type="text" name="languages_other" placeholder="Other (please specify)" style="margin-top: 12px;">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        A6. Which language would you prefer for AI-generated legal documents?
+                        <span class="question-type">(Single select)</span>
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="ai_language" value="english"> English only</label>
+                        <label class="radio-item"><input type="radio" name="ai_language" value="hindi"> Hindi</label>
+                        <label class="radio-item"><input type="radio" name="ai_language" value="mix"> Mix of English & Hindi</label>
+                        <label class="radio-item"><input type="radio" name="ai_language" value="regional"> Other Indian language</label>
+                        <label class="radio-item"><input type="radio" name="ai_language" value="no_pref"> No preference</label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION B: PAIN POINTS -->
+            <div class="section">
+                <h2 class="section-title">Section B: Pain Points & Current Challenges</h2>
+                
+                <div class="question">
+                    <label class="question-label">B2. What are the TOP 3 tasks you'd most like to automate or reduce?</label>
+                    <textarea name="top_tasks" placeholder="List your top 3 most time-consuming tasks..."></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        B3. What are your biggest hurdles with legal research?
+                        <span class="question-type">(Multiple select)</span>
+                    </label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="research_hurdles" value="precedents"> Difficult to find relevant Indian precedents</label>
+                        <label class="checkbox-item"><input type="checkbox" name="research_hurdles" value="databases"> Hard to navigate multiple databases</label>
+                        <label class="checkbox-item"><input type="checkbox" name="research_hurdles" value="cross-ref"> Time-consuming to cross-reference statutes</label>
+                        <label class="checkbox-item"><input type="checkbox" name="research_hurdles" value="summaries"> Difficulty with landmark case summaries</label>
+                        <label class="checkbox-item"><input type="checkbox" name="research_hurdles" value="state-nav"> State-specific vs. national law navigation</label>
+                        <label class="checkbox-item"><input type="checkbox" name="research_hurdles" value="cost"> High cost of legal databases</label>
+                        <label class="checkbox-item"><input type="checkbox" name="research_hurdles" value="outdated"> Inconsistent or outdated information</label>
+                        <label class="checkbox-item"><input type="checkbox" name="research_hurdles" value="language"> Language barrier in regional courts</label>
+                    </div>
+                    <input type="text" name="research_hurdles_other" placeholder="Other (please specify)" style="margin-top: 12px;">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        B4. What frustrates you most about document drafting?
+                        <span class="question-type">(Multiple select)</span>
+                    </label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="drafting_frustrations" value="scratch"> Starting from scratch every time</label>
+                        <label class="checkbox-item"><input type="checkbox" name="drafting_frustrations" value="compliance"> Ensuring compliance with latest amendments</label>
+                        <label class="checkbox-item"><input type="checkbox" name="drafting_frustrations" value="formatting"> Formatting for different court submissions</label>
+                        <label class="checkbox-item"><input type="checkbox" name="drafting_frustrations" value="terminology"> Language precision in legal terminology</label>
+                        <label class="checkbox-item"><input type="checkbox" name="drafting_frustrations" value="templates"> Adapting standard templates to case specifics</label>
+                        <label class="checkbox-item"><input type="checkbox" name="drafting_frustrations" value="clauses"> Remembering all required clauses/sections</label>
+                        <label class="checkbox-item"><input type="checkbox" name="drafting_frustrations" value="repetitive"> Time spent on repetitive clauses</label>
+                    </div>
+                    <input type="text" name="drafting_frustrations_other" placeholder="Other (please specify)" style="margin-top: 12px;">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">B7. What is your biggest frustration with current legal databases/tools?</label>
+                    <textarea name="db_frustration" placeholder="Describe your main frustration..."></textarea>
+                </div>
+            </div>
+
+            <!-- SECTION C: AI EXPERIENCE -->
+            <div class="section">
+                <h2 class="section-title">Section C: AI & Technology Experience</h2>
+                
+                <div class="question">
+                    <label class="question-label">
+                        C1. Have you used any AI tools in your legal practice?
+                        <span class="question-type">(Single select)</span>
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="ai_usage" value="regular"> Yes, regularly</label>
+                        <label class="radio-item"><input type="radio" name="ai_usage" value="occasional"> Yes, but occasionally</label>
+                        <label class="radio-item"><input type="radio" name="ai_usage" value="interested"> No, but interested</label>
+                        <label class="radio-item"><input type="radio" name="ai_usage" value="skeptical"> No, and skeptical</label>
+                        <label class="radio-item"><input type="radio" name="ai_usage" value="unfamiliar"> No, unfamiliar with legal AI options</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        C4. Rate your comfort level with AI-assisted legal work
+                        <span class="question-type">(Scale 1-5)</span>
+                    </label>
+                    <div class="scale-group">
+                        <div class="scale-option">
+                            <input type="radio" name="ai_comfort" value="1">
+                            <span class="scale-label">1<br>Very uncomfortable</span>
+                        </div>
+                        <div class="scale-option">
+                            <input type="radio" name="ai_comfort" value="2">
+                            <span class="scale-label">2</span>
+                        </div>
+                        <div class="scale-option">
+                            <input type="radio" name="ai_comfort" value="3">
+                            <span class="scale-label">3<br>Neutral</span>
+                        </div>
+                        <div class="scale-option">
+                            <input type="radio" name="ai_comfort" value="4">
+                            <span class="scale-label">4</span>
+                        </div>
+                        <div class="scale-option">
+                            <input type="radio" name="ai_comfort" value="5">
+                            <span class="scale-label">5<br>Very comfortable</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        C5. What features would you most want in an AI legal assistant?
+                        <span class="question-type">(Multiple select, max 5)</span>
+                    </label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="desired_features" value="research"> Instant case law research & precedent matching</label>
+                        <label class="checkbox-item"><input type="checkbox" name="desired_features" value="doc_gen"> Document generation with Indian legal compliance</label>
+                        <label class="checkbox-item"><input type="checkbox" name="desired_features" value="citation"> Citation verification & statute cross-reference</label>
+                        <label class="checkbox-item"><input type="checkbox" name="desired_features" value="amendments"> Real-time law amendments & notifications</label>
+                        <label class="checkbox-item"><input type="checkbox" name="desired_features" value="client_comm"> Client communication templates</label>
+                        <label class="checkbox-item"><input type="checkbox" name="desired_features" value="calendar"> Deadline & case calendar management</label>
+                        <label class="checkbox-item"><input type="checkbox" name="desired_features" value="analysis"> Legal analysis & risk assessment for cases</label>
+                        <label class="checkbox-item"><input type="checkbox" name="desired_features" value="multilang"> Multi-language support (Hindi, regional languages)</label>
+                        <label class="checkbox-item"><input type="checkbox" name="desired_features" value="voice"> Voice-to-legal-document conversion</label>
+                        <label class="checkbox-item"><input type="checkbox" name="desired_features" value="cost_benefit"> Cost-benefit analysis for litigation</label>
+                        <label class="checkbox-item"><input type="checkbox" name="desired_features" value="predictive"> Predictive outcomes based on similar cases</label>
+                        <label class="checkbox-item"><input type="checkbox" name="desired_features" value="review"> Automatic document review & redaction</label>
+                        <label class="checkbox-item"><input type="checkbox" name="desired_features" value="contract"> Contract analysis & clause extraction</label>
+                    </div>
+                    <input type="text" name="desired_features_other" placeholder="Other (please specify)" style="margin-top: 12px;">
+                </div>
+            </div>
+
+            <!-- SECTION E: ETHICS -->
+            <div class="section">
+                <h2 class="section-title">Section E: Ethics, Trust & Regulatory Concerns</h2>
+                
+                <div class="question">
+                    <label class="question-label">
+                        E1. Which uses of AI in legal work are acceptable to you?
+                        <span class="question-type">(Multiple select)</span>
+                    </label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="acceptable_uses" value="research"> Legal research & case analysis</label>
+                        <label class="checkbox-item"><input type="checkbox" name="acceptable_uses" value="draft"> First-draft document generation</label>
+                        <label class="checkbox-item"><input type="checkbox" name="acceptable_uses" value="templates"> Client communication templates</label>
+                        <label class="checkbox-item"><input type="checkbox" name="acceptable_uses" value="internal"> Internal memoranda & analysis</label>
+                        <label class="checkbox-item"><input type="checkbox" name="acceptable_uses" value="filings"> Official court filings</label>
+                        <label class="checkbox-item"><input type="checkbox" name="acceptable_uses" value="advice"> Client-facing advice or opinions</label>
+                        <label class="checkbox-item"><input type="checkbox" name="acceptable_uses" value="negotiation"> Contract negotiation assistance</label>
+                        <label class="checkbox-item"><input type="checkbox" name="acceptable_uses" value="all"> All of the above</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">E4. What Bar Council guidelines concern you most regarding AI use?</label>
+                    <textarea name="bar_council_concerns" placeholder="Describe your primary concerns..."></textarea>
+                </div>
+            </div>
+
+            <!-- SECTION G: OPEN-ENDED -->
+            <div class="section">
+                <h2 class="section-title">Section G: Open-Ended Questions</h2>
+                
+                <div class="question">
+                    <label class="question-label">G1. Describe your ideal AI legal assistant. What would it do, and how would you interact with it?</label>
+                    <textarea name="ideal_assistant" placeholder="Describe your vision in 200-300 words..." style="min-height: 150px;"></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">G2. What features do NOT exist in current legal tools that you desperately need?</label>
+                    <textarea name="missing_features" placeholder="Describe missing features..."></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">G3. What would prevent you from adopting an AI legal assistant?</label>
+                    <textarea name="adoption_barriers" placeholder="List potential barriers..."></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">
+                        G5. Would you be willing to pilot a beta version of an AI legal assistant?
+                        <span class="question-type">(Single select)</span>
+                    </label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="pilot_interest" value="very"> Yes, very interested</label>
+                        <label class="radio-item"><input type="radio" name="pilot_interest" value="somewhat"> Yes, somewhat interested</label>
+                        <label class="radio-item"><input type="radio" name="pilot_interest" value="maybe"> Maybe, depends on details</label>
+                        <label class="radio-item"><input type="radio" name="pilot_interest" value="no"> No, not interested</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <label class="question-label">G6. Best contact method for follow-up:</label>
+                    <input type="email" name="contact_email" placeholder="Email" style="margin-bottom: 10px;">
+                    <input type="tel" name="contact_phone" placeholder="Phone" style="margin-bottom: 10px;">
+                    <input type="text" name="contact_whatsapp" placeholder="WhatsApp">
+                </div>
+
+                <div class="question">
+                    <label class="question-label">G7. Any additional comments, warnings, or insights?</label>
+                    <textarea name="additional_comments" placeholder="Share any additional thoughts..."></textarea>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="submitBtn">Submit Survey</button>
+        </form>
+    </div>
+
+    <script>
+        const form = document.getElementById('surveyForm');
+        const progressBar = document.getElementById('progressBar');
+        const submitBtn = document.getElementById('submitBtn');
+        const successMessage = document.getElementById('successMessage');
+
+        // Update progress bar as user scrolls
+        window.addEventListener('scroll', () => {
+            const windowHeight = window.innerHeight;
+            const documentHeight = document.documentElement.scrollHeight - windowHeight;
+            const scrolled = window.scrollY;
+            const progress = (scrolled / documentHeight) * 100;
+            progressBar.style.width = Math.min(progress, 100) + '%';
+        });
+
+        // Limit checkboxes to max selections
+        const practiceCheckboxes = document.querySelectorAll('input[name="practice_area"]');
+        practiceCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const checked = document.querySelectorAll('input[name="practice_area"]:checked');
+                if (checked.length > 3) {
+                    checkbox.checked = false;
+                    alert('Please select a maximum of 3 practice areas.');
+                }
+            });
+        });
+
+        const featureCheckboxes = document.querySelectorAll('input[name="desired_features"]');
+        featureCheckboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                const checked = document.querySelectorAll('input[name="desired_features"]:checked');
+                if (checked.length > 5) {
+                    checkbox.checked = false;
+                    alert('Please select a maximum of 5 desired features.');
+                }
+            });
+        });
+
+        // Handle form submission
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Disable submit button to prevent double submission
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Submitting...';
+            
+            const formData = new FormData(form);
+            const data = {};
+            
+            // Process form data
+            for (let [key, value] of formData.entries()) {
+                if (data[key]) {
+                    if (Array.isArray(data[key])) {
+                        data[key].push(value);
+                    } else {
+                        data[key] = [data[key], value];
+                    }
+                } else {
+                    data[key] = value;
+                }
+            }
+            
+            // Add timestamp
+            data.timestamp = new Date().toISOString();
+            
+            // Log to console
+            console.log('Survey Data:', JSON.stringify(data, null, 2));
+            
+            // Show success message
+            successMessage.style.display = 'block';
+            form.style.display = 'none';
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // In production, send to backend:
+            fetch('https://script.google.com/macros/s/AKfycbzVkR0oNxY51Bmfh2ak72xiQYv4h0l7zB_qKuEohWB7Kx0MK_wwUPK77YzDkTV_QgW9/exec', {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => response.json())
+            .then(result => {
+                successMessage.style.display = 'block';
+                form.style.display = 'none';
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error submitting the form. Please try again.');
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Survey';
+            });
+        });
+    </script>
+</body>
+</html>
